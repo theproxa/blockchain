@@ -4,8 +4,9 @@ from blocks import Block
 
 class Blockchain:
 
-    def __init__(self):
+    def __init__(self, difficalt = 1):
         self.chain = [self.create_genesis_block()]
+        self.difficalt = difficalt
     
     def create_genesis_block(self):
         return Block(0, "0", "Genesis Block", time.time())
@@ -21,6 +22,7 @@ class Blockchain:
             data=data,
             timestamp=time.time(),
         )
+        new_block.main_block(self.difficalt)
         self.chain.append(new_block)
     
     def is_chain_valid(self):
